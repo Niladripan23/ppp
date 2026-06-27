@@ -73,6 +73,7 @@ body {
 /* ===== SCRAPBOOK CENTERPIECE ===== */
 .scrapbook-wrapper {
   position: relative;
+  display: block;
   width: min(96%, 520px);
   margin: 0 auto;
   margin-bottom: -3.5rem;
@@ -80,7 +81,7 @@ body {
   transform: translateY(15px);
   animation: titleFadeIn 1.2s ease forwards 0.3s;
   transition: box-shadow 1.2s ease;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .scrapbook-img {
@@ -91,25 +92,24 @@ body {
 }
 
 .audio-finished-glow {
-  box-shadow: 0 0 45px rgba(245, 187, 208, 0.35);
-  border-radius: 16px;
+  filter: drop-shadow(0 0 18px rgba(245, 187, 208, 0.5));
 }
 
 /* ===== AUDIO OVERLAYS (Calibrated to 1024×1536 PNG) ===== */
 
-/* 
-  PNG audio card layout (pixel measurements on 1024×1536):
-  - Play circle center:  x≈258, y≈1322  → left:25.2%, top:86.1%
+/*
+  Pixel measurements (python scan):
+  - Play circle center:  x=240 (23.4%), y=1334 (86.9%) | diameter=159px (15.5%)
+    → left: 15.6%, top: 81.7%, width: 15.5%
   - Waveform bar:        x:340→810, y≈1348 → left:33.2%, top:87.5%, w:46%
-  - Time display:        x≈835→918, y≈1348 → right:7.5%, top:87.5%
+  - Time display:        x=840 (82%), y=1336 (87%) | right edge=12.2%
 */
 
 .audio-play-btn {
   position: absolute;
-  /* Circle center at ~25.2% from left, ~86.1% from top */
-  top: 83.5%;
-  left: 12%;
-  width: 13%;
+  top: 63.7%;
+  left: 17.6%;
+  width: 15.5%;
   aspect-ratio: 1;
   border-radius: 50%;
   background: transparent;
@@ -121,8 +121,7 @@ body {
   justify-content: center;
   color: #fff;
   transition: background 0.25s ease, transform 0.15s ease;
-  /* Large tap target for mobile */
-  min-width: 44px;
+  min-width: 50px;
   min-height: 44px;
 }
 
@@ -130,7 +129,6 @@ body {
   transform: scale(0.9);
 }
 
-/* When playing: translucent fill hides the drawn arrow and shows pause icon */
 .audio-play-btn.playing {
   background: rgba(185, 45, 90, 0.82);
   backdrop-filter: blur(3px);
@@ -144,55 +142,57 @@ body {
 
 .waveform-container {
   position: absolute;
-  top: 86.2%;
+  top: 68.0%;
   left: 33%;
-  width: 47%;
-  height: 5.5%;
+  width: 38%;
+  height: 6%;
   z-index: 10;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
 
-/* Pink progress fill overlays the waveform drawn in PNG */
+/* Pink progress fill — NO box visible, only a subtle tint over waveform */
 .waveform-fill {
   position: absolute;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  height: 60%;
+  height: 55%;
   width: 0%;
-  background: rgba(190, 45, 90, 0.45);
+  background: rgba(160, 30, 70, 0.35);
   mix-blend-mode: multiply;
   pointer-events: none;
-  border-radius: 3px;
+  border-radius: 2px;
   transition: width 0.08s linear;
 }
 
-/* Invisible range input covers waveform for tap-to-seek */
+/* Invisible seeker — no visible box */
 #audioSeeker {
   position: absolute;
-  inset: 0;
+  left: 0;
+  top: -10px;
   width: 100%;
-  height: 100%;
+  height: calc(100% + 20px);
   opacity: 0;
   cursor: pointer;
   margin: 0;
   padding: 0;
-  /* Expand touch target vertically */
-  top: -8px;
-  bottom: -8px;
-  height: calc(100% + 16px);
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
 }
 
-/* Covers the static "01:21" printed in the PNG */
+/* Covers the static "01:21" in the PNG */
 .audio-time-overlay {
   position: absolute;
-  top: 68.8%;
-  right: 19%;
-  transform: translateY(0);
+  top: 68.5%;
+  right: 18.9%;
+  transform: translateY(25%);
   font-family: 'Lato', sans-serif;
-  font-size: clamp(0.6rem, 2vw, 0.82rem);
+  font-size: clamp(0.55rem, 1.8vw, 0.78rem);
   font-weight: 700;
   color: #7a1f40;
   z-index: 10;
