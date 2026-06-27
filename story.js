@@ -289,6 +289,7 @@ function initAudioPlayer() {
     audioEnded = true;
     playBtn.classList.remove('playing');
     setIcons(false);
+    playIcon.style.display = 'none';
     // Reset time display to show full duration
     timeDisplay.textContent = formatTime(audio.duration);
     seeker.value = 100;
