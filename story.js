@@ -1,4 +1,4 @@
-﻿// ============================================
+// ============================================
 //   SHARED JOURNEY NAVIGATION
 // ============================================
 const JourneyNav = {
@@ -302,8 +302,9 @@ function initAudioPlayer() {
 
   // Show continue button (disabled) after a short delay
   setTimeout(() => {
-    continueBtn.classList.add('visible');
-  }, 1500);
+  continueBtn.classList.remove('disabled-btn');
+  continueBtn.classList.add('visible');
+}, 1500);
 }
 
 
