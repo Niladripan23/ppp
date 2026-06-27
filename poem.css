@@ -1,4 +1,4 @@
-﻿/* ===== RESET & BASE ===== */
+/* ===== RESET & BASE ===== */
 *, *::before, *::after {
   margin: 0; padding: 0; box-sizing: border-box;
 }
@@ -71,7 +71,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.3rem;
+  gap: 0.6rem;
 }
 
 .polaroid-zone {
@@ -434,7 +434,7 @@ body {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 760px) {
   .poem-page {
-    padding: 4.2rem 1rem 2.6rem;
+    padding: 2.8rem 1rem 2.6rem;
   }
 
   .memory-scene {
